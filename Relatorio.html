@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Relatórios Sofisticado</title>
+  <style>
+    /* Definição de variáveis para cores */
+    :root {
+      --primary-color: #6200ea;
+      --secondary-color: #03dac6;
+      --tertiary-color: #ff4081;
+      --background-color: #f1f3f4;
+      --white: #ffffff;
+      --dark: #333333;
+      --border-radius: 12px;
+    }
+
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: var(--background-color);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .color-option {
+      width: 30%;
+      height: 40px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+
+    .color-option:first-child { background: #6200ea; }
+    .color-option:nth-child(2) { background: #03dac6; }
+    .color-option:nth-child(3) { background: #ff4081; }
+
+    .generate-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .generate-btn:hover {
+      background: var(--secondary-color);
+    }
+
+    /* Relatório gerado */
+    .report {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      margin-top: 3rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .report-section {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: var(--secondary-color);
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+    }
+
+    .report-section input[type="text"] {
+      width: 80%;
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      border: none;
+      margin-left: 10px;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-color);
+      color: var(--white);
+      text-align: center;
+      border-radius: var(--border-radius);
+      font-weight: bold;
+      margin-top: 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: var(--tertiary-color);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Gerador de Relatórios</h1>
+
+  <div class="input-group">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" placeholder="Digite o nome">
+  </div>
+
+  <div class="input-group">
+    <label for="titulo">Título do Relatório</label>
+    <input type="text" id="titulo" placeholder="Digite o título">
+  </div>
+
+  <div class="input-group">
+    <label for="style">Escolha o estilo do relatório</label>
+    <select id="style">
+      <option>Roxo & Índigo (Padrão)</option>
+      <option>Verde & Azul</option>
+      <option>Laranja & Amarelo</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>Escolha a cor do relatório</label>
+    <div class="color-options">
+      <div class="color-option"></div>
+      <div class="color-option"></div>
+      <div class="color-option"></div>
+    </div>
+  </div>
+
+  <button class="generate-btn" onclick="generateReport()">Gerar Relatório</button>
+</div>
+
+<div class="report" id="report">
+  <div class="report-header">
+    <span id="report-name">Nome: </span>
+    <span id="report-date">Data: </span>
+  </div>
+
+  <h2 id="report-title">Título do Relatório</h2>
+
+  <div class="report-section">
+    <span>👥 Recrutamento</span>
+    <input type="text" id="recrutamento" placeholder="Detalhes do recrutamento">
+  </div>
+
+  <div class="report-section">
+    <span>📈 Movimento</span>
+    <input type="text" id="movimento" placeholder="Detalhes do movimento">
+  </div>
+
+  <div class="report-section">
+    <span>🏅 Subiu de Cargo</span>
+    <input type="text" id="cargo" placeholder="Detalhes do cargo">
+  </div>
+
+  <div class="report-section">
+    <span>📝 Descrição</span>
+    <input type="text" id="descricao" placeholder="Descrição do relatório">
+  </div>
+
+  <a href="#" class="download-btn">⬇️ Baixar Relatório como Imagem</a>
+</div>
+
+<script>
+  function generateReport() {
+    const nome = document.getElementById('nome').value || 'Nome';
+    const titulo = document.getElementById('titulo').value || 'Título do Relatório';
+    const data = new Date().toLocaleDateString();
+
+    document.getElementById('report-name').innerText = `Nome: ${nome}`;
+    document.getElementById('report-title').innerText = titulo;
+    document.getElementById('report-date').innerText = `Data: ${data}`;
+
+    document.getElementById('report').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>

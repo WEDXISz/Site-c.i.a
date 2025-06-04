@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cargos</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  body {
+    background: #f1f1f1;
+  }
+  header {
+    background: #8a2be2;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  header h1 {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  .search-bar {
+    padding: 10px;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background: #fff;
+  }
+  #mensagem {
+    padding: 10px;
+    color: red;
+    font-weight: bold;
+  }
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .card-header {
+    background: #8a2be2;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header i {
+    font-size: 1.2em;
+  }
+  .card-header h2 {
+    font-size: 1em;
+  }
+  .card-body {
+    padding: 10px;
+  }
+  .cargo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+  }
+  .cargo:last-child {
+    border-bottom: none;
+  }
+  .cargo-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cargo-info span {
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: #8a2be2;
+    border-radius: 2px;
+  }
+  .cargo-info p {
+    margin: 0;
+  }
+  .cargo button {
+    background: none;
+    border: 2px solid #8a2be2;
+    color: #8a2be2;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="./img/imperix.jpg" alt="Logo">
+  </div>
+  <h1>📁 Cargos</h1>
+  <div>🌙</div>
+</header>
+
+<div class="search-bar">
+  <input type="text" id="buscaInput" placeholder="Buscar cargos..." oninput="buscarCargo()" />
+</div>
+
+<p id="mensagem"></p>
+
+<div class="card">
+  <div class="card-header">
+    <i>️👑</i>
+    <div>
+      <h2>SUPERIORES</h2>
+      <small>Total de Cargos: 5</small>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Imperador</p></div>
+      <button>️ⁱᵐᵖʳ</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Diretor</p></div>
+      <button>️ᵖʳᵉˢˢ</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Vice Diretor</p></div>
+      <button>️ᵖʳᵉˢˢⁿˣ</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Diretor Interino</p></div>
+      <button>️ᵖʳᵉˢˢᵗᵏ</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Primeiro Ministro</p></div>
+      <button>️ᵖʳᵉᵐⁱᵉ</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <i>🏛</i>
+    <div>
+      <h2>Casa Branca</h2>
+      <small>Total de Cargos: 26</small>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Assistente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Presidente da Justiça</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Procurador-Geral</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>chanceler</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Assistente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>juiz inspetor</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ceo-regente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Procuradora-Geral</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>chanceler-ass</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>mnistro da defesa</p></div>
+      <button>🏷️</button>
+    </div>
+
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Ministro da inteligencia</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Ministro das relações</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ministra da enconomia</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>tesoureiro geral</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Presidente do brinks</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ministro do interior</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>perfilador-geral</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>tabelião</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>reporte</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>padre</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>arquiteto</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>arquiteto tk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>Procurador-Geral</p></div>
+      <button>🏷️</button>
+    </div>    <div class="cargo">
+      <div class="cargo-info"><span></span><p>delegado</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>carrasco</p></div>
+      <button>🏷️</button>
+    </div>
+  </div>
+<p id="mensagem"></p>
+
+<div class="card">
+  <div class="card-header">
+    <i>⏳</i>
+    <div>
+      <h2>
+SUPERINTENDÊNCIA</h2>
+      <small>Total de Cargos: 5</small>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ceo chefe geral</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>ceo residente</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>ceo interino</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>dirigente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>conselheiro</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>diretor da abin</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>guardião</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>professor geral</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>professor tk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>embaixador geral</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>embaixador tk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>secretario geral</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>secretario tk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>supervisortk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>tesoureiro</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ministro do link</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>contador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>desenvolvedor</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>engenheiro</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>reservista regente</p></div>
+      <button>🏷️</button>
+    </div>
+<p id="mensagem"></p>
+
+<div class="card">
+  <div class="card-header">
+    <i>📈</i>
+    <div>
+      <h2>Capital Regional</h2>
+      <small>Total de Cargos: 5</small>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>juiz regente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>deputado</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>vereador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>advogado</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>prefeitor</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>monge</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>repositor</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>sherieff</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ministro do estado</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>ancião</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>gerente de operações</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>mosqueteiro</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>perfilador</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>upador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>upador assitente</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>animador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>organizador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>codernador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>emissario</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>distribuidor</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>gerente analista</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>indicador</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>instrutor</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>policias</p></div>
+      <button>🏷️</button>
+    </div>
+     <div class="cargo">
+      <div class="cargo-info"><span></span><p>recpcionista</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>vigia</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>segurança</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>adm federal</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>adm residente</p></div>
+      <button>🏷️</button>
+    </div>
+      <div class="cargo">
+      <div class="cargo-info"><span></span><p>adm oficial</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>oligarcas</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>oligarcas tk</p></div>
+      <button>🏷️</button>
+    </div>
+    <div class="cargo">
+      <div class="cargo-info"><span></span><p>adm em teste</p></div>
+      <button>🏷️</button>
+    </div>
+  </div>
+
+
+
+
+<!-- SCRIPT DE BUSCA -->
+<script>
+  function buscarCargo() {
+    const termo = document.getElementById("buscaInput").value.toLowerCase();
+    const cargos = document.querySelectorAll(".cargo");
+    let encontrou = false;
+
+    cargos.forEach(cargo => {
+      const nome = cargo.querySelector("p").textContent.toLowerCase();
+      const visivel = nome.includes(termo);
+      cargo.style.display = visivel ? "flex" : "none";
+      if (visivel) encontrou = true;
+    });
+
+    const mensagem = document.getElementById("mensagem");
+    mensagem.textContent = (!encontrou && termo !== "") ? "Cargo errado" : "";
+  }
+</script>
+
+</body>
+</html>
