@@ -36,6 +36,7 @@
   .search-bar {
     padding: 10px;
   }
+  
   .search-bar input {
     width: 100%;
     padding: 10px;
@@ -134,12 +135,12 @@
   </div>
   <div class="card-body">
     <div class="cargo">
-      <div class="cargo-info"><span></span><p>Imperador</p></div>
-      <button>️ⁱᵐᵖʳ</button>
+      <div class="cargo-info"><span></span><p>Imperador sombrio</p></div>
+      <button>️ⁱᵐᵖ sʙʀ</button>
     </div>
     <div class="cargo">
-      <div class="cargo-info"><span></span><p>Diretor</p></div>
-      <button>️ᵖʳᵉˢˢ</button>
+      <div class="cargo-info"><span></span><p>Diretor sombrio</p></div>
+            <button onclick="copiarCargo('ᵛⁱᶜᵉ sʙʀ')">ᵛⁱᶜᵉ sʙʀ</button>
     </div>
     <div class="cargo">
       <div class="cargo-info"><span></span><p>Vice Diretor</p></div>
@@ -503,26 +504,42 @@ SUPERINTENDÊNCIA</h2>
     </div>
   </div>
 
+<!-- Outras cards podem seguir o mesmo padrão -->
 
-
-
-<!-- SCRIPT DE BUSCA -->
 <script>
-  function buscarCargo() {
-    const termo = document.getElementById("buscaInput").value.toLowerCase();
-    const cargos = document.querySelectorAll(".cargo");
-    let encontrou = false;
+function buscarCargo() {
+  const input = document.getElementById("buscaInput").value.toLowerCase();
+  const cargos = document.querySelectorAll(".cargo");
+  let encontrou = false;
 
-    cargos.forEach(cargo => {
-      const nome = cargo.querySelector("p").textContent.toLowerCase();
-      const visivel = nome.includes(termo);
-      cargo.style.display = visivel ? "flex" : "none";
-      if (visivel) encontrou = true;
-    });
+  cargos.forEach(cargo => {
+    const textoCargo = cargo.querySelector("p").textContent.toLowerCase();
+    if (textoCargo.includes(input)) {
+      cargo.style.display = "flex";
+      encontrou = true;
+    } else {
+      cargo.style.display = "none";
+    }
+  });
 
-    const mensagem = document.getElementById("mensagem");
-    mensagem.textContent = (!encontrou && termo !== "") ? "Cargo errado" : "";
+  const mensagem = document.getElementById("mensagem");
+  if (!encontrou && input.length > 0) {
+    mensagem.textContent = "Nenhum cargo encontrado.";
+  } else {
+    mensagem.textContent = "";
   }
+}
+
+function copiarCargo(texto) {
+  navigator.clipboard.writeText(texto)
+    .then(() => {
+      alert(`"${texto}" copiado para a área de transferência!`);
+    })
+    .catch(err => {
+      console.error('Erro ao copiar: ', err);
+      alert('Falha ao copiar o texto.');
+    });
+}
 </script>
 
 </body>
