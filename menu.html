@@ -2,8 +2,13 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IMPERIX LTDA.</title>
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #6a00f4, #00e0ff);
@@ -14,7 +19,7 @@
 
   header {
     background: rgba(0, 0, 0, 0.4);
-    padding: 30px;
+    padding: 20px;
     text-align: center;
     backdrop-filter: blur(6px);
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
@@ -22,7 +27,7 @@
 
   header h1 {
     margin: 0;
-    font-size: 2.2em;
+    font-size: 1.8em;
     font-weight: 700;
     background: linear-gradient(90deg, #ffeb3b, #fbc02d);
     -webkit-background-clip: text;
@@ -30,27 +35,22 @@
   }
 
   .menu {
-    max-width: 450px;
-    margin: 50px auto;
+    max-width: 400px;
+    margin: 30px auto;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(8px);
-    transition: transform 0.3s;
-  }
-
-  .menu:hover {
-    transform: scale(1.02);
   }
 
   .menu a {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.15);
-    margin: 10px 0;
-    padding: 12px 18px;
-    border-radius: 12px;
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 10px;
     text-decoration: none;
     color: #fff;
     font-weight: 600;
@@ -59,21 +59,21 @@
   }
 
   .menu a span {
-    margin-right: 12px;
-    font-size: 1.3em;
+    margin-right: 10px;
+    font-size: 1.2em;
   }
 
   .menu a:hover {
     background: rgba(255, 255, 255, 0.25);
-    transform: translateX(10px);
+    transform: translateX(8px);
   }
 
   footer {
     text-align: center;
-    padding: 20px;
-    margin-top: 60px;
+    padding: 15px;
+    margin-top: 40px;
     color: rgba(255,255,255,0.6);
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
 
   footer a {
@@ -84,6 +84,23 @@
 
   footer a:hover {
     text-decoration: underline;
+  }
+
+  /* Responsivo */
+  @media (max-width: 500px) {
+    header h1 {
+      font-size: 1.5em;
+    }
+
+    .menu {
+      margin: 20px 10px;
+      padding: 15px;
+    }
+
+    .menu a {
+      padding: 8px 12px;
+      font-size: 0.95em;
+    }
   }
 </style>
 </head>
