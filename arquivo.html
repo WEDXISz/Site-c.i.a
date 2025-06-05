@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Imperix - Gerador de Arquivo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 30px;
+      color: #ffffff;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #ccc;
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: none;
+      background-color: #2e2e3a;
+      color: #fff;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      background-color: #3a3a48;
+      box-shadow: 0 0 0 3px #4dabf7;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #4dabf7, #217af0);
+      font-size: 17px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      background: linear-gradient(90deg, #3a8df0, #1e6fe3);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .icon {
+      margin-right: 10px;
+    }
+
+    .preview {
+      margin-top: 25px;
+      background-color: #2a2a38;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #e0e0e0;
+      max-height: 150px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .error, .success {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    .success {
+      color: #51cf66;
+    }
+
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .footer a {
+      color: #4dabf7;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📂 Imperix - Gerador de Arquivo</h2>
+
+    <label for="filename">📝 Nome do Arquivo</label>
+    <input type="text" id="filename" placeholder="Ex: numeros.txt">
+
+    <label for="numbers">🔢 Números (separados por vírgula, espaço ou Enter)</label>
+    <textarea id="numbers" rows="6" placeholder="Ex: 10, 20&#10;30 40 50"></textarea>
+
+    <label for="fileFormat">📄 Formato do Arquivo</label>
+    <select id="fileFormat">
+      <option value="txt">.txt</option>
+      <option value="csv">.csv</option>
+    </select>
+
+    <button onclick="gerarArquivo()">
+      <span class="icon">📥</span> Baixar Arquivo
+    </button>
+
+    <div class="preview" id="preview">Pré-visualização: Insira os números e veja aqui...</div>
+    <div class="error" id="errorMessage"></div>
+
+    <div class="footer">
+      © 2025 IMPERIX LTDA. <a href="https://imperix.com" target="_blank">Visite nosso site</a>
+    </div>
+  </div>
+
+  <script>
+    function gerarArquivo() {
+      const nome = document.getElementById('filename').value.trim() || 'numeros';
+      const format = document.getElementById('fileFormat').value;
+      const numerosBrutos = document.getElementById('numbers').value;
+
+      const numeros = numerosBrutos
+        .split(/[\s,;\n\r]+/)
+        .map(n => n.trim())
+        .filter(n => n !== '' && !isNaN(n));
+
+      if (numeros.length === 0) {
+        document.getElementById('errorMessage').textContent = "⚠️ Por favor, insira ao menos um número válido.";
+        return;
+      } else {
+        document.getElementById('errorMessage').textContent = "";
+      }
+
+      const conteudo = format === 'csv' ? numeros.join(',') : numeros.join('\n');
+      const blob = new Blob([conteudo], { type: format === 'csv' ? 'text/csv' : 'text/plain' });
+      const link = document.createElement('a');
+
+      link.href = URL.createObjectURL(blob);
+      link.download = nome + '.' + format;
+      link.click();
+
+      URL.revokeObjectURL(link.href);
+
+      document.getElementById('preview').textContent = `Pré-visualização:\n${numeros.join('\n')}`;
+      alert("✅ Arquivo gerado com sucesso!");
+    }
+
+    document.getElementById('numbers').addEventListener('input', function () {
+      const preview = document.getElementById('preview');
+      const input = document.getElementById('numbers').value.trim();
+
+      const previewContent = input
+        .split(/[\s,;\n\r]+/)
+        .filter(n => n !== '' && !isNaN(n))
+        .join('\n');
+
+      preview.textContent = previewContent || 'Pré-visualização: Insira os números e veja aqui...';
+    });
+  </script>
+</body>
+</html>
