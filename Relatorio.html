@@ -1,251 +1,262 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Relatórios Sofisticado</title>
-  <style>
-    /* Definição de variáveis para cores */
-    :root {
-      --primary-color: #6200ea;
-      --secondary-color: #03dac6;
-      --tertiary-color: #ff4081;
-      --background-color: #f1f3f4;
-      --white: #ffffff;
-      --dark: #333333;
-      --border-radius: 12px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gerador de Relatórios</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+<style>
+  :root {
+    --primary-color: #6c63ff;
+    --secondary-color: #03dac6;
+    --accent-color: #ff4081;
+    --bg-color: #f9f9f9;
+    --white: #ffffff;
+    --text-color: #333333;
+    --border-radius: 16px;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
 
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: var(--background-color);
-      color: var(--dark);
-      line-height: 1.6;
-    }
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    padding: 2rem;
+  }
 
-    /* Container principal */
-    .container {
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: var(--white);
-      border-radius: var(--border-radius);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+  h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+  }
 
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      color: var(--primary-color);
-      margin-bottom: 2rem;
-    }
+  .header-image {
+    display: block;
+    margin: 0 auto 2rem;
+    width: 80px;
+  }
 
-    .input-group {
-      margin-bottom: 1.5rem;
-    }
+  .container {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem;
+  }
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
-    }
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    background: #f1f1f1;
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+  }
 
-    input[type="text"], select {
-      width: 100%;
-      padding: 0.75rem;
-      border: 2px solid #ddd;
-      border-radius: var(--border-radius);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
+  .input-group i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
 
-    input[type="text"]:focus, select:focus {
-      border-color: var(--primary-color);
-      outline: none;
-    }
+  input[type="text"] {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+  }
 
-    .color-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 1rem;
-    }
+  .generate-btn,
+  .download-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+  }
 
-    .color-option {
-      width: 30%;
-      height: 40px;
-      border-radius: var(--border-radius);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+  .generate-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    margin-top: 1rem;
+  }
 
-    .color-option:hover {
-      transform: scale(1.1);
-    }
+  .generate-btn:hover {
+    background: var(--secondary-color);
+  }
 
-    .color-option:first-child { background: #6200ea; }
-    .color-option:nth-child(2) { background: #03dac6; }
-    .color-option:nth-child(3) { background: #ff4081; }
+  .download-btn {
+    background: var(--accent-color);
+    color: var(--white);
+    margin-top: 2rem;
+  }
 
-    .generate-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--primary-color);
-      color: var(--white);
-      border: none;
-      border-radius: var(--border-radius);
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+  .download-btn:hover {
+    background: var(--secondary-color);
+  }
 
-    .generate-btn:hover {
-      background: var(--secondary-color);
-    }
+  .report {
+    display: none;
+    margin-top: 3rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+  }
 
-    /* Relatório gerado */
-    .report {
-      background: var(--white);
-      padding: 2rem;
-      border-radius: var(--border-radius);
-      margin-top: 3rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      display: none;
-    }
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
 
-    .report-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-      font-size: 1rem;
-      font-weight: bold;
-      color: var(--primary-color);
-    }
+  #report-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
 
-    .report-section {
-      padding: 1rem;
-      margin-bottom: 1rem;
-      background: var(--secondary-color);
-      border-radius: var(--border-radius);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--white);
-    }
+  .report-section {
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 
-    .report-section input[type="text"] {
-      width: 80%;
-      padding: 0.5rem;
-      border-radius: var(--border-radius);
-      border: none;
-      margin-left: 10px;
-    }
+  .report-section strong {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
 
-    .download-btn {
-      display: block;
-      width: 100%;
-      padding: 1rem;
-      background: var(--primary-color);
-      color: var(--white);
-      text-align: center;
-      border-radius: var(--border-radius);
-      font-weight: bold;
-      margin-top: 2rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .download-btn:hover {
-      background: var(--tertiary-color);
-    }
-  </style>
+  .generate-btn i,
+  .download-btn i {
+    margin-right: 0.5rem;
+  }
+</style>
 </head>
 <body>
 
+<h1>Gerador de Relatórios</h1>
+<img src="https://cdn-icons-png.flaticon.com/512/4359/4359980.png" alt="Relatório" class="header-image" />
+
 <div class="container">
-  <h1>Gerador de Relatórios</h1>
-
   <div class="input-group">
-    <label for="nome">Nome</label>
-    <input type="text" id="nome" placeholder="Digite o nome">
+    <i class="fa-solid fa-user"></i>
+    <input type="text" id="nome" placeholder="Digite o nome" oninput="updateReport()" />
   </div>
 
   <div class="input-group">
-    <label for="titulo">Título do Relatório</label>
-    <input type="text" id="titulo" placeholder="Digite o título">
+    <i class="fa-solid fa-heading"></i>
+    <input type="text" id="titulo" placeholder="Digite o título" oninput="updateReport()" />
   </div>
 
   <div class="input-group">
-    <label for="style">Escolha o estilo do relatório</label>
-    <select id="style">
-      <option>Roxo & Índigo (Padrão)</option>
-      <option>Verde & Azul</option>
-      <option>Laranja & Amarelo</option>
-    </select>
+    <i class="fa-solid fa-users"></i>
+    <input type="text" id="recrutamento-input" placeholder="Detalhes do recrutamento" oninput="updateReport()" />
   </div>
 
   <div class="input-group">
-    <label>Escolha a cor do relatório</label>
-    <div class="color-options">
-      <div class="color-option"></div>
-      <div class="color-option"></div>
-      <div class="color-option"></div>
-    </div>
+    <i class="fa-solid fa-chart-line"></i>
+    <input type="text" id="movimento-input" placeholder="Detalhes do movimento" oninput="updateReport()" />
   </div>
 
-  <button class="generate-btn" onclick="generateReport()">Gerar Relatório</button>
+  <div class="input-group">
+    <i class="fa-solid fa-arrow-up"></i>
+    <input type="text" id="cargo-input" placeholder="Detalhes do cargo" oninput="updateReport()" />
+  </div>
+
+  <div class="input-group">
+    <i class="fa-solid fa-pen"></i>
+    <input type="text" id="descricao-input" placeholder="Descrição do relatório" oninput="updateReport()" />
+  </div>
+
+  <button class="generate-btn" onclick="downloadReport()">
+    <i class="fa-solid fa-download"></i> Baixar Relatório
+  </button>
 </div>
 
 <div class="report" id="report">
   <div class="report-header">
-    <span id="report-name">Nome: </span>
-    <span id="report-date">Data: </span>
+    <span id="report-name">Nome:</span>
+    <span id="report-date">Data:</span>
   </div>
 
-  <h2 id="report-title">Título do Relatório</h2>
+  <h2 id="report-title">Título</h2>
 
   <div class="report-section">
-    <span>👥 Recrutamento</span>
-    <input type="text" id="recrutamento" placeholder="Detalhes do recrutamento">
-  </div>
-
-  <div class="report-section">
-    <span>📈 Movimento</span>
-    <input type="text" id="movimento" placeholder="Detalhes do movimento">
+    <strong>👥 Recrutamento</strong>
+    <div id="report-recrutamento"></div>
   </div>
 
   <div class="report-section">
-    <span>🏅 Subiu de Cargo</span>
-    <input type="text" id="cargo" placeholder="Detalhes do cargo">
+    <strong>📈 Movimento</strong>
+    <div id="report-movimento"></div>
   </div>
 
   <div class="report-section">
-    <span>📝 Descrição</span>
-    <input type="text" id="descricao" placeholder="Descrição do relatório">
+    <strong>🏅 Subiu de Cargo</strong>
+    <div id="report-cargo"></div>
   </div>
 
-  <a href="#" class="download-btn">⬇️ Baixar Relatório como Imagem</a>
+  <div class="report-section">
+    <strong>📝 Descrição</strong>
+    <div id="report-descricao"></div>
+  </div>
+
+  <button class="download-btn" onclick="downloadReport()">
+    <i class="fa-solid fa-download"></i> Baixar Imagem
+  </button>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script>
-  function generateReport() {
-    const nome = document.getElementById('nome').value || 'Nome';
-    const titulo = document.getElementById('titulo').value || 'Título do Relatório';
+  function updateReport() {
+    const nome = document.getElementById('nome').value.trim() || 'Nome';
+    const titulo = document.getElementById('titulo').value.trim() || 'Título do Relatório';
     const data = new Date().toLocaleDateString();
+    const recrutamento = document.getElementById('recrutamento-input').value.trim() || 'Sem detalhes';
+    const movimento = document.getElementById('movimento-input').value.trim() || 'Sem detalhes';
+    const cargo = document.getElementById('cargo-input').value.trim() || 'Sem detalhes';
+    const descricao = document.getElementById('descricao-input').value.trim() || 'Sem descrição';
 
     document.getElementById('report-name').innerText = `Nome: ${nome}`;
     document.getElementById('report-title').innerText = titulo;
     document.getElementById('report-date').innerText = `Data: ${data}`;
+    document.getElementById('report-recrutamento').innerText = recrutamento;
+    document.getElementById('report-movimento').innerText = movimento;
+    document.getElementById('report-cargo').innerText = cargo;
+    document.getElementById('report-descricao').innerText = descricao;
 
     document.getElementById('report').style.display = 'block';
+  }
+
+  function downloadReport() {
+    const report = document.getElementById('report');
+    html2canvas(report).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'relatorio.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
   }
 </script>
 
